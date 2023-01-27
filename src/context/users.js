@@ -5,6 +5,7 @@ export const UsersContext = createContext()
 export const UsersDispatcherContext = createContext()
 
 export const UsersProvider = ({ children }) => {
+
     const [data, setData] = useState(null)
     const [error, setError] = useState("")
     const [isLoading, setIsLoading] = useState(false)
@@ -21,6 +22,19 @@ export const UsersProvider = ({ children }) => {
             setError(error.message)
         }
     }
+
+    const deleteUser = async (userId) => {
+        try {
+            setIsLoading(true)
+            await usersApi.deleteUser(userId)
+            setIsLoading(false)
+            await getData()
+        } catch (error) {
+            setIsLoading(false)
+            setError(error.message)
+        }
+    }
+
     /*     const state = {
             data: data,
             error: error,
@@ -31,7 +45,7 @@ export const UsersProvider = ({ children }) => {
         } */
 
     const state = { data, error, isLoading }
-    const dispatchers = { getData }
+    const dispatchers = { getData, deleteUser }
 
     return (
         <>

@@ -17,8 +17,11 @@ const GetUsers = () => {
     return (
         <>
             <div>GetUsers</div>
+
             <UserList list={data} />
+
             <p>error: {error}</p>
+
             <p>isLoading: {String(isLoading)}</p>
         </>
 

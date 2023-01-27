@@ -6,7 +6,7 @@ import { users } from "../context";
 const UserCard = ({ username, name, id }) => {
     const LINK_ADDRESS = `/users/${id}`
 
-    const { deleteUser } = useContext(users.usersDispatcherContext)
+    const { deleteUser } = useContext(users.UsersDispatcherContext)
 
     const handleDeleteWithId = () => {
         return deleteUser(id)
