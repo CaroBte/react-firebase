@@ -16,7 +16,7 @@ const GetUsers = () => {
 
     return (
         <>
-            <div>GetUsers</div>
+            <div>GetUsers container</div>
 
             <UserList list={data} />
 
@@ -28,4 +28,4 @@ const GetUsers = () => {
     )
 }
 
-export { GetUsers }
+export default GetUsers 
