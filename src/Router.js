@@ -1,7 +1,7 @@
-import React from "react"
-import { createBrowserRouter, Route, RouterProvider, createRoutesFromElements } from "react-router-dom"
-import Navbar from "./layout/Navbar"
-import { Home, Users } from "./pages"
+import React from "react";
+import { Home, Users } from "./pages";
+import Navbar from "./layout/";
+import { createBrowserRouter, Route, createRoutesFromElements } from "react-router-dom"
 
 export const router = createBrowserRouter(
     createRoutesFromElements(

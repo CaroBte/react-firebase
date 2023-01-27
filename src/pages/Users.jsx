@@ -1,5 +1,5 @@
 import React from 'react'
-import { GetUsers } from "..containers/GetUsers";
+import { GetUsers } from "..containers";
 
 const Users = () => {
     return (
