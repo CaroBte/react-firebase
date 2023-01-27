@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react'
 import { users as usersApi } from "../api"
 
 export const UsersContext = createContext()
+export const UsersDispatcherContext = createContext()
 
 export const UsersProvider = ({ children }) => {
     const [data, setData] = useState(null)
@@ -20,16 +21,25 @@ export const UsersProvider = ({ children }) => {
             setError(error.message)
         }
     }
+    /*     const state = {
+            data: data,
+            error: error,
+            isLoading: isLoading
+        } */
+    /*     const dispatchers = {
+            getData: getData
+        } */
 
     const state = { data, error, isLoading }
     const dispatchers = { getData }
 
     return (
         <>
-            <UsersContext.Provider value={state}>
-                {children}
-            </UsersContext.Provider>
-
+            <UsersDispatcherContext.Provider value={dispatchers}>
+                <UsersContext.Provider value={state}>
+                    {children}
+                </UsersContext.Provider>
+            </UsersDispatcherContext.Provider>
         </>
     )
 }
