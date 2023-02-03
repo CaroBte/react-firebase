@@ -13,16 +13,16 @@ const UserForm = ({ createNewUser }) => {
     }
 
     return (
-        <div>
-            UserForm.jsx component
+        <div className='mb-5'>
+            <p className='mb-4'>UserForm.jsx component</p>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="text" name="username" placeholder="username" {...register("username", { required: true })} />
+                <input className='form-control mb-2 w-25' type="text" name="username" placeholder="username" {...register("username", { required: true })} />
                 {errors.username && <span>Please write your username</span>}
-                <input type="text" name="name" placeholder="name" {...register("name", { required: true })} />
+                <input className='form-control mb-2 w-25' type="text" name="name" placeholder="name" {...register("name", { required: true })} />
                 {errors.name && <span>Please write your name</span>}
-                <input type="number" name="age" placeholder="age" {...register("age", { required: true })} />
+                <input className='form-control mb-2 w-25' type="number" name="age" placeholder="age" {...register("age", { required: true })} />
                 {errors.age && <span>Please write your age</span>}
-                <button type="submit">Send</button>
+                <button className='btn btn-success' type="submit">Send</button>
             </form>
         </div>
     )
