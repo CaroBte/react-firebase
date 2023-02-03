@@ -10,7 +10,6 @@ export const router = createBrowserRouter(
                 <Route path="/" element={<Home />} />
                 <Route path="/users" element={<Users />} />
             </Route>
-
         </>
     )
 )

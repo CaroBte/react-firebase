@@ -1,11 +1,13 @@
 import React from 'react'
-import { GetUsers } from "../containers";
+import { CreateUsers, GetUsers } from "../containers";
 
 const Users = () => {
     return (
         <>
-            <div>Users pages</div>
-            <GetUsers />
+            <div>Users pages
+                <CreateUsers />
+                <GetUsers />
+            </div>
         </>
     )
 }

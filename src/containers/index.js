@@ -1,3 +1,6 @@
+import CreateUsers from "./CreateUsers";
 import GetUsers from "./GetUsers";
 
-export { GetUsers }
+
+
+export { GetUsers, CreateUsers }

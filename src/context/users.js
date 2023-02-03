@@ -35,6 +35,17 @@ export const UsersProvider = ({ children }) => {
         }
     }
 
+    const createNewUser = async (user) => {
+        try {
+            setIsLoading(true)
+            await usersApi.createUser(user)
+            setIsLoading(false)
+            await getData()
+        } catch (error) {
+            setIsLoading(false)
+            setError(error.message)
+        }
+    }
     /*     const state = {
             data: data,
             error: error,
@@ -45,7 +56,7 @@ export const UsersProvider = ({ children }) => {
         } */
 
     const state = { data, error, isLoading }
-    const dispatchers = { getData, deleteUser }
+    const dispatchers = { getData, deleteUser, createNewUser }
 
     return (
         <>
