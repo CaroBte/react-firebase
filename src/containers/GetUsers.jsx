@@ -16,13 +16,12 @@ const GetUsers = () => {
 
     return (
         <>
-            <div>GetUsers container</div>
-
-            <UserList list={data} />
-
-            <p>error: {error}</p>
-
-            <p>isLoading: {String(isLoading)}</p>
+            <div>
+                <h4>GetUsers container</h4>
+                <UserList list={data} />
+                <p>error: {error}</p>
+                <p>isLoading: {String(isLoading)}</p>
+            </div>
         </>
 
     )

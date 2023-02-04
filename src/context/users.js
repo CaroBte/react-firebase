@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react'
 import { users as usersApi } from "../api"
 
+
 export const UsersContext = createContext()
 export const UsersDispatcherContext = createContext()
 
@@ -9,6 +10,11 @@ export const UsersProvider = ({ children }) => {
     const [data, setData] = useState(null)
     const [error, setError] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+    const [currentUser, setCurrentUser] = useState({
+        username: "",
+        name: "",
+        age: "",
+    })
 
     const getData = async () => {
         try {
@@ -35,12 +41,29 @@ export const UsersProvider = ({ children }) => {
         }
     }
 
-    const createNewUser = async (user) => {
+    const sendUser = async (userData) => {
         try {
             setIsLoading(true)
-            await usersApi.createUser(user)
+
+            if (userData.id) {
+                await usersApi.updateUser(userData.id, userData)
+            } else {
+                await usersApi.createUser(userData)
+            }
             setIsLoading(false)
             await getData()
+        } catch (error) {
+            setIsLoading(false)
+            setError(error.message)
+        }
+    }
+
+    const getUserDetails = async (id) => {
+        try {
+            setIsLoading(true)
+            const res = await usersApi.getUserDetails(id)
+            setCurrentUser(res.data);
+            setIsLoading(false)
         } catch (error) {
             setIsLoading(false)
             setError(error.message)
@@ -55,8 +78,8 @@ export const UsersProvider = ({ children }) => {
             getData: getData
         } */
 
-    const state = { data, error, isLoading }
-    const dispatchers = { getData, deleteUser, createNewUser }
+    const state = { data, error, isLoading, currentUser }
+    const dispatchers = { getData, deleteUser, sendUser, getUserDetails }
 
     return (
         <>

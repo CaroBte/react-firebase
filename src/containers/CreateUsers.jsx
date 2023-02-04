@@ -1,15 +1,28 @@
-import React, { useContext } from 'react'
-import UserForm from '../components/UserForm'
+import React, { useContext, useEffect } from 'react'
+import { useParams } from 'react-router'
+import { UserForm } from '../components/'
 import { users } from "../context"
 
 
 const CreateUsers = () => {
 
-    const { createNewUser } = useContext(users.UsersDispatcherContext)
+    const { id } = useParams()
+    const { sendUser, getUserDetails } = useContext(users.UsersDispatcherContext)
+    const { currentUser } = useContext(users.UsersContext)
+
+    useEffect(() => {
+        if (id) {
+            getUserDetails(id)
+        }
+    }, [id])
+
+
 
     return (
-        <div>CreateUsers container
-            <UserForm createNewUser={createNewUser} />
+
+        <div>
+            <h3>CreateUsers container</h3>
+            <UserForm sendUser={sendUser} initialValues={currentUser} />
         </div>
     )
 }

@@ -1,14 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { users } from "../context";
 
-
-const UserCard = ({ username, name, id }) => {
+const UserCard = ({ username, name, id, age, deleteUser }) => {
     const LINK_ADDRESS = `/users/${id}`
 
-    const { deleteUser } = useContext(users.UsersDispatcherContext)
-
-    const handleDeleteWithId = () => {
+    const handleDelete = () => {
         return deleteUser(id)
     }
 
@@ -21,10 +17,13 @@ const UserCard = ({ username, name, id }) => {
                 <p className="card-text">
                     {name} y tengo el id: {id}
                 </p>
+                <p className="card-text">
+                    edad: {age}
+                </p>
                 <Link className='btn btn-primary' to={LINK_ADDRESS} >
                     Editar
                 </Link>
-                <button onClick={handleDeleteWithId} className="btn btn-danger">
+                <button onClick={handleDelete} className="btn btn-danger">
                     eliminar
                 </button>
             </div>

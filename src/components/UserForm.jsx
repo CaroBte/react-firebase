@@ -1,15 +1,23 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 
-const UserForm = ({ createNewUser }) => {
+const UserForm = ({ sendUser, initialValues }) => {
 
-    const { register, handleSubmit, resetField, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+        values: initialValues
+    });
+
+    const handleReset = () => {
+        return {
+            username: "",
+            name: "",
+            age: ""
+        }
+    }
 
     const onSubmit = (data) => {
-        createNewUser(data)
-        resetField("username")
-        resetField("name")
-        resetField("age")
+        sendUser(data)
+        reset(handleReset)
     }
 
     return (
@@ -20,7 +28,7 @@ const UserForm = ({ createNewUser }) => {
                 {errors.username && <span>Please write your username</span>}
                 <input className='form-control mb-2 w-25' type="text" name="name" placeholder="name" {...register("name", { required: true })} />
                 {errors.name && <span>Please write your name</span>}
-                <input className='form-control mb-2 w-25' type="number" name="age" placeholder="age" {...register("age", { required: true })} />
+                <input className='form-control mb-2 w-25' type="text" name="age" placeholder="age" {...register("age", { required: true })} />
                 {errors.age && <span>Please write your age</span>}
                 <button className='btn btn-success' type="submit">Send</button>
             </form>
