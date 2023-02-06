@@ -1,7 +1,5 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore, getDocs, collection } from "firebase/firestore"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,3 +13,18 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+const db = getFirestore(app)
+
+export const getData = async () => {
+    const snapshot = await getDocs(collection(db, "users"))
+    const data = []
+    snapshot.forEach(doc => {
+        const user = doc.data()
+        user.id = doc.id
+        data.push(user)
+        /*  data.push({ ...user, id }) */
+    })
+    console.log(data);
+    return { data }
+
+}
