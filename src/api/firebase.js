@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
 import { getFirestore, getDocs, collection, addDoc, doc, deleteDoc, setDoc, getDoc } from "firebase/firestore"
 
 // Your web app's Firebase configuration
@@ -15,7 +16,24 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 const userCollection = collection(db, "users")
+const auth = getAuth(app)
+const authProvider = new GoogleAuthProvider()
 
+//Login
+
+export const login = async () => {
+    authProvider.setCustomParameters({ prompt: "select_account" })
+    const res = await signInWithPopup(auth, authProvider)
+    return res.user
+}
+
+//Logout
+
+export const logout = async () => await signOut(auth)
+
+
+
+//CRUD functions
 export const getData = async () => {
     const snapshot = await getDocs(userCollection)
     const data = []

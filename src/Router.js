@@ -1,5 +1,5 @@
 import React from "react";
-import { Home, Users } from "./pages";
+import { Home, Users, Login } from "./pages";
 import { Navbar } from "./layout";
 import { createBrowserRouter, Route, createRoutesFromElements } from "react-router-dom"
 
@@ -8,6 +8,7 @@ export const router = createBrowserRouter(
         <>
             <Route path="/" element={<Navbar />} >
                 <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/users/*" element={<Users />} />
                 <Route path="/users/:id/*" element={<Users />} />
             </Route>
