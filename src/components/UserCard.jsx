@@ -9,7 +9,7 @@ const UserCard = ({ username, name, id, age, deleteUser }) => {
     }
 
     return (
-        <div className="card mb-2">
+        <div className="card mb-2 w-50">
             <div className="card-body">
                 <h5 className="card-title">
                     {username}

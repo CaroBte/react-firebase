@@ -11,7 +11,8 @@ const UserForm = ({ sendUser, initialValues }) => {
         return {
             username: "",
             name: "",
-            age: ""
+            age: "",
+            id: ""
         }
     }
 
@@ -24,6 +25,7 @@ const UserForm = ({ sendUser, initialValues }) => {
         <div className='mb-5'>
             <p className='mb-4'>UserForm.jsx component</p>
             <form onSubmit={handleSubmit(onSubmit)}>
+                <input disabled className='form-control mb-2 w-25' type="text" name="id" placeholder="id" {...register("id")} />
                 <input className='form-control mb-2 w-25' type="text" name="username" placeholder="username" {...register("username", { required: true })} />
                 {errors.username && <span>Please write your username</span>}
                 <input className='form-control mb-2 w-25' type="text" name="name" placeholder="name" {...register("name", { required: true })} />
