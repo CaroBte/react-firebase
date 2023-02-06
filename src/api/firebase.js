@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, getDocs, collection } from "firebase/firestore"
+import { getFirestore, getDocs, collection, addDoc } from "firebase/firestore"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -14,9 +14,10 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
+const userCollection = collection(db, "users")
 
 export const getData = async () => {
-    const snapshot = await getDocs(collection(db, "users"))
+    const snapshot = await getDocs(userCollection)
     const data = []
     snapshot.forEach(doc => {
         const user = doc.data()
@@ -28,3 +29,5 @@ export const getData = async () => {
     return { data }
 
 }
+
+export const createUser = async (newUser) => await addDoc(userCollection, newUser)
