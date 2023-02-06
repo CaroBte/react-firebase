@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, getDocs, collection, addDoc, doc, deleteDoc } from "firebase/firestore"
+import { getFirestore, getDocs, collection, addDoc, doc, deleteDoc, setDoc, getDoc } from "firebase/firestore"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -30,7 +30,18 @@ export const getData = async () => {
 
 }
 
-export const createUser = async (newUser) => await addDoc(userCollection, newUser)
+export const createUser = async ({ name, username, age }) => await addDoc(userCollection, { name, username, age })
 
 export const deleteUser = async (id) => await deleteDoc(doc(userCollection, id))
 
+export const updateUser = async (id, newUser) => {
+    console.log("actualizando...", newUser)
+    await setDoc(doc(userCollection, id), newUser)
+}
+
+export const getUserDetails = async (id) => {
+    const snapshot = await getDoc(doc(userCollection, id))
+    const user = snapshot.data()
+    user.id = snapshot.id
+    return { data: user }
+}
