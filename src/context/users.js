@@ -32,7 +32,7 @@ export const UsersProvider = ({ children }) => {
     const deleteUser = async (userId) => {
         try {
             setIsLoading(true)
-            await usersApi.deleteUser(userId)
+            await firebase.deleteUser(userId)
             setIsLoading(false)
             await getData()
         } catch (error) {
