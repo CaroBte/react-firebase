@@ -31,8 +31,6 @@ export const login = async () => {
 
 export const logout = async () => await signOut(auth)
 
-
-
 //CRUD functions
 export const getData = async () => {
     const snapshot = await getDocs(userCollection)
@@ -43,7 +41,6 @@ export const getData = async () => {
         data.push(user)
         /*  data.push({ ...user, id }) */
     })
-    console.log(data);
     return { data }
 
 }

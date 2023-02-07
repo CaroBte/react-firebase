@@ -1,13 +1,17 @@
 import React from 'react'
 import { RouterProvider } from 'react-router-dom';
 import { router } from "./Router";
-import { users } from "./context";
+import { users, auth } from "./context";
 
-function App() {
+const App = () => {
   return (
-    <users.UsersProvider>
-      <RouterProvider router={router} />
-    </users.UsersProvider>
+    <>
+      <auth.AuthProvider>
+        <users.UsersProvider>
+          <RouterProvider router={router} />
+        </users.UsersProvider>
+      </auth.AuthProvider>
+    </>
   );
 }
 

@@ -4,5 +4,6 @@ import Login from "./Login";
 
 export {
     Users,
-    Home, Login
+    Home,
+    Login
 }
