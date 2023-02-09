@@ -4,6 +4,7 @@ import { router } from "./Router";
 import { users, auth } from "./context";
 
 const App = () => {
+
   return (
     <>
       <auth.AuthProvider>

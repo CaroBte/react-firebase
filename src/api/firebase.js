@@ -16,20 +16,6 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 const userCollection = collection(db, "users")
-const auth = getAuth(app)
-const authProvider = new GoogleAuthProvider()
-
-//Login
-
-export const login = async () => {
-    authProvider.setCustomParameters({ prompt: "select_account" })
-    const res = await signInWithPopup(auth, authProvider)
-    return res.user
-}
-
-//Logout
-
-export const logout = async () => await signOut(auth)
 
 //CRUD functions
 export const getData = async () => {
@@ -37,12 +23,13 @@ export const getData = async () => {
     const data = []
     snapshot.forEach(d => {
         const user = d.data()
+        console.log("info user ", user);
         user.id = d.id
+        console.log("data id:", d.id);
         data.push(user)
         /*  data.push({ ...user, id }) */
     })
     return { data }
-
 }
 
 export const createUser = async ({ name, username, age }) => await addDoc(userCollection, { name, username, age })
@@ -50,7 +37,6 @@ export const createUser = async ({ name, username, age }) => await addDoc(userCo
 export const deleteUser = async (id) => await deleteDoc(doc(userCollection, id))
 
 export const updateUser = async (id, newUser) => {
-    console.log("actualizando...", newUser)
     await setDoc(doc(userCollection, id), newUser)
 }
 
@@ -60,3 +46,16 @@ export const getUserDetails = async (id) => {
     user.id = snapshot.id
     return { data: user }
 }
+
+//Login && logout
+
+export const auth = getAuth(app)
+const authProvider = new GoogleAuthProvider()
+
+export const login = async () => {
+    authProvider.setCustomParameters({ prompt: "select_account" })
+    const res = await signInWithPopup(auth, authProvider)
+    return res.user
+}
+
+export const logout = async () => await signOut(auth)

@@ -4,11 +4,10 @@ import { auth } from "../context"
 
 const Login = () => {
 
-    const { user, setUser } = useContext(auth.authContext)
+    const { user } = useContext(auth.authContext)
 
-    const handleClick = async () => {
-        const _user = await firebase.login()
-        setUser(_user)
+    const handleClick = () => {
+        firebase.login()
     }
 
     const handleLogout = () => {
